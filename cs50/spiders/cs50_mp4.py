@@ -31,7 +31,7 @@ class CS50Mp4Scrapper(scrapy.Spider):
                     if next_page is not None:
                         next_page = response.urljoin(next_page)
                         self.log('parsing Url: %s' % response.url)
-                        if re.search(r"\.mp4$", next_page) is not None:
+                        if re.search(r"720p\.mp4$", next_page) is not None:
                             result_file.write(next_page)
                             result_file.write('\n')
                         if (

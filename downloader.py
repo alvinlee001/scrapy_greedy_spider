@@ -10,10 +10,11 @@ def getOutputFilePath(dir, name):
     return os.path.join(dir, name)
 
 def downloadFile(downloadOutputPath, url):
-    r = requests.get(url, stream=True)
+    r = requests.get(url.rstrip(), stream=True)
     with open(downloadOutputPath, "wb") as downloadStream:
-        print('Downloading from url: %s' % url)
         total_length = int(r.headers.get('content-length'))
+        print('Downloading from url: %s of size %s' % (url, total_length))
+
         for ch in progress.bar(r.iter_content(chunk_size = 2391975), expected_size=(total_length/1024) + 1):
             if ch:
                 downloadStream.write(ch)
